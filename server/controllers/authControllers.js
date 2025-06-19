@@ -22,7 +22,7 @@ const loginHandler = async (req, res) => {
 
   res.cookie('token', token, {
         httpOnly: true,     
-        secure: false,       //true in production
+        secure: true,       //true in production
         sameSite: 'Lax', 
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
       })
@@ -65,7 +65,7 @@ const registerHandler = async (req, res) => {
 
   res.cookie('token', token, {
       httpOnly: true,     
-      secure: false,       //true in production
+      secure: true,       //true in production
       sameSite: 'Lax', 
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     })
@@ -77,7 +77,7 @@ const logoutHandler = (req, res) => {
  
   res.clearCookie('token', {
     httpOnly: true,
-    secure: false,  //true in productiton
+    secure: true,  //true in productiton
     sameSite: 'Lax'
   })
   res.json({ message: 'Logged out' })
@@ -146,7 +146,7 @@ const updatedUser = await User.findByIdAndUpdate(findUser._id, {passwordHash: ne
 
   res.cookie('token', token, {
       httpOnly: true,     
-      secure: false,       //true in production
+      secure: true,       //true in production
       sameSite: 'Lax', 
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     }).status(200).json({message: "Password reset successful!", 
