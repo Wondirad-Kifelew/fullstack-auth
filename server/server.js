@@ -9,9 +9,9 @@ import cookieParser from 'cookie-parser';
 
 const app = express()
 // app.use(express.static('dist'))
-
+  
 app.use(cors({
-  origin: process.env.CLIENT_URL, 
+  origin: 'https://fullstack-auth-weld.vercel.app', 
   credentials: true
 }))
 
