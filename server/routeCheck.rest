@@ -1,0 +1,35 @@
+GET http://localhost:5000/
+
+###
+POST http://localhost:5000/api/signup
+Content-Type: application/json
+
+{"username": "yeshi", "email": "yeshialemu64@gmail.com", "password": "amuamuamu"}
+
+###
+POST http://localhost:5000/api/login
+Content-Type: application/json
+
+{"username": "alem", "password": "alemalem"}
+
+###
+POST http://localhost:5000/api/logout
+Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFsZW0iLCJpZCI6IjY4NGVjZmJjOGI3OTI4YWI1MDBhZGEwMyIsImlhdCI6MTc1MDE1NTk5MSwiZXhwIjoxNzUwMjQyMzkxfQ.efmNTGHrdEM1FsrwfgzkqsQ56Ql1dOwYlWpCuVnyiIg; Max-Age=604800; Path=/; Expires=Tue, 24 Jun 2025 10:26:31 GMT; HttpOnly; SameSite=Lax
+
+###
+POST http://localhost:5000/api/afterLogout
+Content-Type: application/json
+
+
+{"name": "wonde"}
+
+###
+POST http://localhost:5000/api/me
+Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFsZW0iLCJpZCI6IjY4NGVjZmJjOGI3OTI4YWI1MDBhZGEwMyIsImlhdCI6MTc1MDE1NjIxMSwiZXhwIjoxNzUwMjQyNjExfQ.PG4dgdhieROGuOGI06OzsuAIIAC6Gvme9UZ9P61c-9c; Max-Age=604800; Path=/; Expires=Tue, 24 Jun 2025 10:30:11 GMT; HttpOnly; SameSite=Lax
+
+###
+POST http://localhost:5000/api/forgot-password
+Content-Type: application/json
+
+
+{"resEmail": "wondiradabebe@gmail.com"}
