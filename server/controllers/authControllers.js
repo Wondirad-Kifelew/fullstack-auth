@@ -108,7 +108,6 @@ const resetToken = jwt.sign(user, process.env.SECRET, {expiresIn: '15m'})
 
 //email sending part
 const resetUrl = `${process.env.CLIENT_URL}/reset-password?token=${resetToken}`;
-console.log(resetUrl)
 const transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
@@ -143,12 +142,11 @@ const updatedUser = await User.findByIdAndUpdate(findUser._id, {passwordHash: ne
       id: updatedUser._id
     }  
   const token = jwt.sign(userToken, process.env.SECRET, {expiresIn: 60*60*24})
-
   res.cookie('token', token, {
       httpOnly: true,     
       secure: false,       //true in production
       sameSite: 'Lax', 
-      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days      
     }).status(200).json({message: "Password reset successful!", 
                          username:updatedUser.username})
 

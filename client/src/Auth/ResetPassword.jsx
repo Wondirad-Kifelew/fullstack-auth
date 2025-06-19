@@ -4,6 +4,7 @@ import { useContext } from 'react'
 import {useLocation, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { AppContext } from './AppContextHelper'
+import { useEffect } from 'react'
 
 const ResetPassword = () => {
   const {setLoggedUser} = useContext(AppContext)
@@ -48,6 +49,20 @@ const ResetPassword = () => {
         }
       }                    
   }
+  useEffect(() => {
+      const fetchUser = async ()=>{
+          try {
+          const response = await axios.post('/api/me')
+          if(response.data.username){
+              setLoggedUser(response.data.username)
+          }    
+          } catch (error) {
+              console.log("error: ", error.response.data)
+              setLoggedUser(null)
+          }
+      }
+      fetchUser()
+    }, [])
   return (
     
    <div className='fixed inset-0 z-50 flex items-center justify-center
