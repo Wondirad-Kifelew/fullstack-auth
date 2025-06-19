@@ -22,7 +22,7 @@ const loginHandler = async (req, res) => {
 
   res.cookie('token', token, {
         httpOnly: true,     
-        secure: true,       //true in production
+        secure: false,       //true in production
         sameSite: 'Lax', 
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
       })
@@ -65,7 +65,7 @@ const registerHandler = async (req, res) => {
 
   res.cookie('token', token, {
       httpOnly: true,     
-      secure: true,       //true in production
+      secure: false,       //true in production
       sameSite: 'Lax', 
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     })
@@ -77,7 +77,7 @@ const logoutHandler = (req, res) => {
  
   res.clearCookie('token', {
     httpOnly: true,
-    secure: true,  //true in productiton
+    secure: false,  //true in productiton
     sameSite: 'Lax'
   })
   res.json({ message: 'Logged out' })
@@ -107,8 +107,8 @@ const forgotPasswordHandler = async(req, res)=>{
 const resetToken = jwt.sign(user, process.env.SECRET, {expiresIn: '15m'})
 
 //email sending part
-const resetUrl = `http://localhost:5173/reset-password?token=${resetToken}`;
-
+const resetUrl = `${process.env.CLIENT_URL}/reset-password?token=${resetToken}`;
+console.log(resetUrl)
 const transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
@@ -146,7 +146,7 @@ const updatedUser = await User.findByIdAndUpdate(findUser._id, {passwordHash: ne
 
   res.cookie('token', token, {
       httpOnly: true,     
-      secure: true,       //true in production
+      secure: false,       //true in production
       sameSite: 'Lax', 
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     }).status(200).json({message: "Password reset successful!", 

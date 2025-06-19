@@ -8,13 +8,12 @@ import authMiddleware from './middleware/authMiddleware.js';
 import cookieParser from 'cookie-parser';
 
 const app = express()
-app.use(express.static('dist'))
+// app.use(express.static('dist'))
 
-// app.use(cors({
-//   origin: false, 
-//   credentials: true
-// }))
-
+app.use(cors({
+  origin: process.env.CLIENT_URL, 
+  credentials: true
+}))
 
 dbConnection()
 
