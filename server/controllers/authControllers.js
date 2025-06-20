@@ -118,7 +118,7 @@ const transporter = nodemailer.createTransport({
 
   const mailOptions = {
     to: resetEmail,
-    from: `"${process.env.EMAIL_USER_NAME}" <${process.env.EMAIL_USER}>`
+    from: `"${process.env.EMAIL_USER_NAME}" <${process.env.EMAIL_USER}>`,
     subject: 'Password Reset',
     html: `<p>Click the link below to reset your password:</p>
            <a href="${resetUrl}">${resetUrl}</a>`
