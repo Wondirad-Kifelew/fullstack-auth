@@ -33,7 +33,7 @@ const ResetPassword = () => {
       
         if(response){
                       setLoggedUser(response.data.username)
-                      window.localStorage.setItem("isLoggedIn", true)
+                      // window.localStorage.setItem("isLoggedIn", true)
                       toast.success(`${response.data.username} successfully logged in!`)
                   }
       } catch (error) {

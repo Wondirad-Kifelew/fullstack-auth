@@ -25,7 +25,7 @@ Content-Type: application/json
 
 ###
 POST http://localhost:5000/api/me
-Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFsZW0iLCJpZCI6IjY4NGVjZmJjOGI3OTI4YWI1MDBhZGEwMyIsImlhdCI6MTc1MDE1NjIxMSwiZXhwIjoxNzUwMjQyNjExfQ.PG4dgdhieROGuOGI06OzsuAIIAC6Gvme9UZ9P61c-9c; Max-Age=604800; Path=/; Expires=Tue, 24 Jun 2025 10:30:11 GMT; HttpOnly; SameSite=Lax
+Cookie: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFsZW0iLCJpZCI6IjY4NTE0NmE4MzQ1MmM1MThiYzM2YmRmZSIsImlhdCI6MTc1MDM1OTcwOCwiZXhwIjoxNzUwNDQ2MTA4fQ.WX1ifs054oFBbip0Q30V9fxAyfgRFml50VJzapQgihI; Max-Age=604800; Path=/; Expires=Thu, 26 Jun 2025 19:01:48 GMT; HttpOnly; SameSite=Lax
 
 ###
 POST http://localhost:5000/api/forgot-password

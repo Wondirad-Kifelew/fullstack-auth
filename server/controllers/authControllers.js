@@ -22,8 +22,8 @@ const loginHandler = async (req, res) => {
 
   res.cookie('token', token, {
         httpOnly: true,     
-        secure: false,       //true in production
-        sameSite: 'Lax', 
+        secure: true,       //true in production
+        sameSite: 'None', 
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
       })
       .json({ message: 'Logged in', username}); 
@@ -65,8 +65,8 @@ const registerHandler = async (req, res) => {
 
   res.cookie('token', token, {
       httpOnly: true,     
-      secure: false,       //true in production
-      sameSite: 'Lax', 
+      secure: true,       //true in production
+      sameSite: 'None',
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     })
     .json({ message: 'signed up', username}); 
@@ -77,8 +77,8 @@ const logoutHandler = (req, res) => {
  
   res.clearCookie('token', {
     httpOnly: true,
-    secure: false,  //true in productiton
-    sameSite: 'Lax'
+    secure: true,       //true in production
+    sameSite: 'None',
   })
   res.json({ message: 'Logged out' })
 }
@@ -144,12 +144,11 @@ const updatedUser = await User.findByIdAndUpdate(findUser._id, {passwordHash: ne
   const token = jwt.sign(userToken, process.env.SECRET, {expiresIn: 60*60*24})
   res.cookie('token', token, {
       httpOnly: true,     
-      secure: false,       //true in production
-      sameSite: 'Lax', 
+      secure: true,       //true in production
+      sameSite: 'None',     //none in prod   
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days      
     }).status(200).json({message: "Password reset successful!", 
                          username:updatedUser.username})
-
 } catch (error) {
   console.log("Error updaitng password: ", error)
 }

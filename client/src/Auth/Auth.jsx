@@ -17,7 +17,7 @@ const Auth = () => {
     const [resetEmail, setResetEmail] = useState('')
     const [loading, setLoading] = useState(false)
 
-    
+
     const handleLogin = async (e)=>{
         e.preventDefault()
         const credentials = {
@@ -104,11 +104,12 @@ try {
     const fetchUser = async ()=>{
         try {
         const response = await axios.post('/api/me')
+        console.log("me response: ", response)
         if(response.data.username){
             setLoggedUser(response.data.username)
         }    
         } catch (error) {
-            console.log("error: ", error.response.data)
+            console.log("error: ", error.response)
             setLoggedUser(null)
         }
     }
