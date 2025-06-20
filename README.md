@@ -53,15 +53,14 @@ npm run dev
 
 ## API Endpoints
 
-| Method | Endpoint               | Purpose                          |
-|--------|------------------------|----------------------------------|
-| POST   | `/api/signup`          | Register a new user              |
-| POST   | `/api/login`           | Log in and set auth cookie       |
-| POST   | `/api/me`              | Get user info from backend for   |   
-|        |                        | page reloads                     |
-| POST   | `/api/logout`          | Clear auth cookie                |
-| POST   | `/api/forgot-password` | Send reset link via email        |
-| POST   | `/api/reset-password`  | Set new password via token       |
+| Method | Endpoint               | Purpose                                       |
+|--------|------------------------|-----------------------------------------------|
+| POST   | `/api/signup`          | Register a new user                           |
+| POST   | `/api/login`           | Log in and set auth cookie                    |
+| POST   | `/api/me`              | Get user info from backend for page reloads   |   
+| POST   | `/api/logout`          | Clear auth cookie                             |
+| POST   | `/api/forgot-password` | Send reset link via email                     |
+| POST   | `/api/reset-password`  | Set new password via token                    |
 
 --> Use `routeCheck.rest` file with REST Client in VS Code to test the routes.
 
@@ -105,5 +104,6 @@ C. Forgetting Password
 -  Role-based access control
 -  Refresh token implementation
 -  Phone verification using OTP
-
+-  Account page where a user can control
+   their account like adding profile pictures or even deleting an account
 ---
