@@ -16,7 +16,8 @@ const loginHandler = async (req, res) => {
   }
   const userToken = {
       username: userFound.username,
-      id: userFound._id
+      id: userFound._id,
+      role:userFound.role
   }
   const token = jwt.sign(userToken, process.env.SECRET, {expiresIn: 60*60*24})
 
@@ -26,7 +27,7 @@ const loginHandler = async (req, res) => {
         sameSite: 'None', 
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
       })
-      .json({ message: 'Logged in', username}); 
+      .json({ message: 'Logged in', username, role: userFound.role}); 
 }
 
 const registerHandler = async (req, res) => { 
@@ -59,8 +60,10 @@ const registerHandler = async (req, res) => {
   
   const userToken = {
       username: savedUser.username,
-      id: savedUser._id
+      id: savedUser._id,
+      role: savedUser.role,
     }  
+
   const token = jwt.sign(userToken, process.env.SECRET, {expiresIn: 60*60*24})
 
   res.cookie('token', token, {
@@ -69,7 +72,7 @@ const registerHandler = async (req, res) => {
       sameSite: 'None',
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     })
-    .json({ message: 'signed up', username}); 
+    .json({ message: 'signed up', username, role: savedUser.role}); 
   
 }
 
@@ -89,7 +92,7 @@ const afterLogoutHandler =(req, res)=>{
   res.send(`${name} responded from server`)
 }
 
-const forgotPasswordHandler = async(req, res)=>{
+ const forgotPasswordHandler = async(req, res)=>{
 
  const {resetEmail} = req.body
 
@@ -107,7 +110,9 @@ const forgotPasswordHandler = async(req, res)=>{
 const resetToken = jwt.sign(user, process.env.SECRET, {expiresIn: '15m'})
 
 //email sending part
-const resetUrl = `${process.env.CLIENT_URL}/reset-password?token=${resetToken}`;
+const resetUrl = `${process.env.NODE_ENV === 'production' ?
+  process.env.CLIENT_URL_PRODUCTION:
+  process.env.CLIENT_URL_DEVELOPMENT}/reset-password?token=${resetToken}`;
 const transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {

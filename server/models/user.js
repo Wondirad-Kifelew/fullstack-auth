@@ -3,7 +3,8 @@ import mongoose from "mongoose";
 const userSchema = mongoose.Schema({
     username: {type: String, required: true, unique:true, minLength: 4},
     email: {type: String, required: true},
-    passwordHash: String
+    passwordHash: String,
+    role: { type: String, enum: ['user', 'admin'], default: 'user'},
 })
 //incase i needed to display the id in the frontend
 userSchema.set('toJSON', {

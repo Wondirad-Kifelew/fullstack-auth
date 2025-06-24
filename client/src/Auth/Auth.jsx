@@ -16,6 +16,8 @@ const Auth = () => {
     const [lostPassBtn, setLostPassBtn] = useState(false)
     const [resetEmail, setResetEmail] = useState('')
     const [loading, setLoading] = useState(false)
+    const [role, setRole] = useState('')
+    
 
 
     const handleLogin = async (e)=>{
@@ -30,6 +32,7 @@ const Auth = () => {
             
             if(loginResponse){
                 setLoggedUser(loginResponse.username)
+                setRole(loginResponse.role)
                 setLoginClicked(false)
                 toast.success(`${loginResponse.username} successfully logged in!`)
                }
@@ -52,6 +55,7 @@ const Auth = () => {
         setUserName('')
         setPassword('')
         setEmail('')
+        setRole('')
     }
 
     const handleRegister= async (e)=>{
@@ -67,6 +71,7 @@ const Auth = () => {
 
         if(signupResponse){
             setLoggedUser(signupResponse.username)
+            setRole(signupResponse.role)
             setLoginClicked(false)
             toast.success(`${signupResponse.username} successfully Signed up`)
         }
@@ -107,6 +112,7 @@ try {
         console.log("me response: ", response)
         if(response.data.username){
             setLoggedUser(response.data.username)
+            setRole(response.data.role)
         }    
         } catch (error) {
             console.log("error: ", error.response)
@@ -117,15 +123,12 @@ try {
   }, [])
 
     return (
-                <div className=" h-screen flex justify-center items-center">
-                
+            <div className=" h-screen flex justify-center items-center">     
               {/* signin/signup popup */}
                 {loginClicked && <div className='fixed inset-0 z-50 flex items-center justify-center
                 bg-gray-500'>
 
-                    <div className='p-4 rounded bg-white text-gray-700 relative max-w-80 mx-5 w-full'>
-            
-            
+              <div className='p-4 rounded bg-white text-gray-700 relative max-w-80 mx-5 w-full'>
                 <div>
                     <h2 className='text-2xl font-semibold mb-4 border-b py-5'>
                     
@@ -229,8 +232,13 @@ try {
                     Log in
                 </button>}
         { loggedUser &&
-        <div className="text-3xl absolute bottom-1/3 text-center">
+        <div className='flex flex-col text-3xl absolute bottom-1/3 text-center'>
+        <div >
         Welcome <span className="text-4xl text-blue-600">{loggedUser}</span>
+        </div>
+        <div>
+        You have logged in as <span className="text-4xl text-blue-600">{role}</span>
+        </div>
         </div> 
         }
     </div>                

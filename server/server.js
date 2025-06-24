@@ -11,7 +11,9 @@ const app = express()
 // app.use(express.static('dist'))
   
 app.use(cors({
-  origin: 'https://fullstack-auth-weld.vercel.app', 
+  origin: process.env.NODE_ENV === 'production' ?
+          'https://fullstack-auth-weld.vercel.app':
+          'http://localhost:5173', 
   credentials: true
 }))
 
@@ -30,10 +32,13 @@ app.post('/api/forgot-password', forgotPasswordHandler)
 
 app.post('/api/logout', authMiddleware.requireToken, logoutHandler)//blocking (a protected route)
 app.post('/api/me', authMiddleware.requireToken, (req, res)=>{
-  res.json({username: req.user.username})
+  res.json({username: req.user.username, role:req.user.role})
 })//blocking (a protected route)
 
-app.post('/api/afterLogout', authMiddleware.requireToken, afterLogoutHandler)//blocking (a protected route)
+// role restricting route
+app.post('/api/admin-only',authMiddleware.requireToken, 
+          authMiddleware.authorizeRole('Admin'),
+          afterLogoutHandler)
 app.post('/api/reset-password', authMiddleware.userExtractorForPassReset,
   authMiddleware.requireToken, passwordResetHandler)
 
